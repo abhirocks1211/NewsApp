@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity
     private Response.Listener<Box> mNewsResponseListener;
     private Response.ErrorListener mErrorListener;
     private List<NewsArticle> mNewsArticles = new ArrayList<>();
+    SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -70,6 +72,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+
+
 
         setupListeners();
         // Setup DrawerLayout
@@ -151,6 +155,7 @@ public class MainActivity extends AppCompatActivity
         NewsRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
         NewsRequestQueue.getInstance(this).addToRequestQueue(gsonRequest);
         Log.v(LOG_TAG, "fetchNewsData()");
+
     }
 
     @Override
@@ -201,6 +206,10 @@ public class MainActivity extends AppCompatActivity
                 url = NetworkUtils.getHeadlines(BaseUrlContract.HEADLINES_BUSINESS).toString();
                 getSupportActionBar().setTitle(R.string.category_business);
                 break;
+            case R.id.nav_headlines_entertainment:
+                url = NetworkUtils.getHeadlines(BaseUrlContract.HEADLINES_BUSINESS).toString();
+                getSupportActionBar().setTitle(R.string.category_business);
+                break;
             case R.id.nav_headlines_technology:
                 url = NetworkUtils.getHeadlines(BaseUrlContract.HEADLINES_TECHNOLOGY).toString();
                 getSupportActionBar().setTitle(R.string.category_technology);
@@ -244,4 +253,6 @@ public class MainActivity extends AppCompatActivity
             }
         };
     }
+
+
 }

@@ -28,4 +28,8 @@ public final class BaseUrlContract {
     public final static String PARAM_SPORTS = "sports";
     public final static String PARAM_TECHNOLOGY = "technology";
 
+
+    public final static String APIPATH = "apiKey";
+    public final static String API = "a04914aeda504e8da19bd931c574c865";
+
 }

@@ -2,6 +2,9 @@ package com.example.abhishek.newsapp.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.abhishek.newsapp.R;
+import com.example.abhishek.newsapp.WebViewActivity;
 import com.example.abhishek.newsapp.models.NewsArticle;
 import com.example.abhishek.newsapp.utils.DateTimeUtils;
 import com.squareup.picasso.Picasso;
@@ -23,6 +27,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsPostViewHo
 
     private Context context;
     private List<NewsArticle> newsPosts = null;
+    String link;
 
     public NewsAdapter(Context context) {
         this.context = context;
@@ -43,7 +48,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsPostViewHo
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(NewsPostViewHolder holder, int position) {
-        NewsArticle article = newsPosts.get(position);
+        final NewsArticle article = newsPosts.get(position);
         holder.title.setText(article.getTitle());
         holder.source.setText(context.getString(
                 R.string.headline_date_format,
@@ -51,6 +56,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsPostViewHo
                 DateTimeUtils.getElapsedTime(article.getPublishedAt())
         ));
         String urlToImage = article.getUrlToImage();
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                link = article.getUrl();
+
+                Intent in = new Intent(context, WebViewActivity.class);
+                in.putExtra("url",link);
+                context.startActivity(in);
+            }
+        });
 
 
         if (urlToImage != null && !TextUtils.isEmpty(urlToImage) && !urlToImage.equals("")) {
@@ -81,6 +97,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsPostViewHo
         private TextView title;
         private TextView source;
         private ImageView imageView;
+        private CardView cardView;
 
 
         public NewsPostViewHolder(View itemView) {
@@ -88,6 +105,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsPostViewHo
             title = itemView.findViewById(R.id.tv_news_title);
             source = itemView.findViewById(R.id.tv_news_source);
             imageView = itemView.findViewById(R.id.iv_news_image);
+            cardView = itemView.findViewById(R.id.card_news);
         }
     }
 }

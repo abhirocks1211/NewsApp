@@ -39,7 +39,8 @@ public final class NetworkUtils {
     public static URL getHeadlines(int category) {
         Uri.Builder builtUri = Uri.parse(BaseUrlContract.NEWS_URL).buildUpon();
         builtUri.appendPath(BaseUrlContract.TOP_HEADLINES_URL)
-                .appendQueryParameter(BaseUrlContract.PARAM_COUNTRY, "in");
+                .appendQueryParameter(BaseUrlContract.PARAM_COUNTRY, "in")
+                .appendQueryParameter(BaseUrlContract.APIPATH, BaseUrlContract.API);
         switch (category) {
             case BaseUrlContract.HEADLINES_BUSINESS:
                 builtUri.appendQueryParameter(BaseUrlContract.PARAM_CATEGORY, BaseUrlContract.PARAM_BUSINESS);
