@@ -16,6 +16,7 @@ import java.util.Map;
  * Sends and parses GSON requests of type {@link T}
  * @param <T> Class Type parsed
  */
+
 public class GsonRequest<T> extends Request<T> {
     private final Gson gson;
     private final Class<T> clazz;
