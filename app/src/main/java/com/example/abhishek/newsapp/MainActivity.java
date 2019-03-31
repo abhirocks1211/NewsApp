@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setTitle(R.string.category_business);
                 break;
             case R.id.nav_headlines_entertainment:
-                url = NetworkUtils.getHeadlines(BaseUrlContract.HEADLINES_BUSINESS).toString();
+                url = NetworkUtils.getHeadlines(BaseUrlContract.HEADLINES_ENTERTAINMENT).toString();
                 getSupportActionBar().setTitle(R.string.category_business);
                 break;
             case R.id.nav_headlines_technology:
